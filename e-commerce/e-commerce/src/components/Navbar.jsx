@@ -1,30 +1,15 @@
 import { NavLink } from "react-router-dom";
 import logotipo from "../assets/logotipo.png";
+import "../styles/navbar.css"
 
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid flex-row-reverse">
-        {/* Logo */}
-        <NavLink className="navbar-brand" to="/">
-          <img src={logotipo} alt="Logo" height="50" />
-        </NavLink>
-
-        {/* Toggler + Iconos lado derecho */}
-        <div className="d-flex align-items-center flex-row-reverse gap-3">
-          {/* Íconos (fuera del colapsable) */}
-          <div className="d-flex gap-3 me-2">
-            <NavLink to="/favorites" className="nav-link">
-              <i className="bi bi-heart fs-5"></i>
-            </NavLink>
-            <NavLink to="/cart" className="nav-link">
-              <i className="bi bi-cart fs-5"></i>
-            </NavLink>
-          </div>
-
-          {/* Botón para menú colapsable */}
+      <div className="container-fluid">
+        {/* Mobile: Toggler + Logo on left */}
+        <div className="d-flex align-items-center">
           <button
-            className="navbar-toggler"
+            className="navbar-toggler me-2"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -34,11 +19,25 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+          <NavLink className="navbar-brand" to="/">
+            <img src={logotipo} alt="Logo" height="50" />
+          </NavLink>
         </div>
 
-        {/* Menú de navegación */}
+        {/* Mobile: Icons on right */}
+        <div className="d-flex d-lg-none gap-3">
+          <NavLink to="/favorites" className="nav-link">
+            <i className="bi bi-heart fs-5 icon-hover"></i>
+          </NavLink>
+          <NavLink to="/cart" className="nav-link">
+            <i className="bi bi-cart fs-5 icon-hover"></i>
+          </NavLink>
+        </div>
+
+        {/* Collapsible content */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          {/* Desktop: Navigation links center */}
+          <ul className="navbar-nav mx-auto">
             <li className="nav-item">
               <NavLink to="/" className="nav-link" end>
                 Inicio
@@ -61,17 +60,37 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* Formulario de búsqueda */}
-          <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Buscar..."
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Buscar
-            </button>
+          {/* Desktop: Search + Icons on right */}
+          <div className="d-none d-lg-flex align-items-center gap-3">
+            <form className="d-flex me-3">
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Buscar..."
+                aria-label="Search"
+              />
+            </form>
+            <NavLink to="/favorites" className="nav-link">
+              <i className="bi bi-heart fs-5 icon-hover"></i>
+            </NavLink>
+            <NavLink to="/cart" className="nav-link">
+              <i className="bi bi-cart fs-5 icon-hover"></i>
+            </NavLink>
+          </div>
+
+          {/* Mobile: Search inside collapsed menu */}
+          <form className="d-lg-none mt-3">
+            <div className="input-group">
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Buscar..."
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-secondary" type="submit">
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
           </form>
         </div>
       </div>

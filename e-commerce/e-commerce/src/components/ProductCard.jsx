@@ -1,36 +1,32 @@
+import StarRating from "./StartRating";
 import "../styles/productCard.css";
 
-function ProductCard({ product }) {
+function ProductCard({ products }) {
   return (
-    <div className="card" style={{ width: "270px" }}>
-      <div className="position-relative">
-        <img
-          src={product.images[0]}
-          alt={product.title}
-          className="card-img-top"
-          style={{ height: "200px", objectFit: "cover" }}
-        />
+    <div>
+      {products.map(({ id, title, description, images, price, rating }) => (
+        <div key={id} className="card h-100">
+          <div>
+            <img
+              src={images[0]}
+              alt={title}
+              className="object-fit-contain"
+              height={200}
+            />
+            <div>
+              <i className="bi bi-heart"></i>
+              <i className="bi bi-eye"></i>
+            </div>
+          </div>
 
-        {/* Íconos en la esquina superior derecha */}
-        <div className="position-absolute top-0 end-0">
-          <i className="bi bi-heart fs-5 text-danger cursor-pointer"></i>
-          <i className="bi bi-eye fs-5 text-primary cursor-pointer"></i>
+          <div>
+            <h6 className="">{title}</h6>
+            <p>${price}</p>
+          </div>
+
+          <p>Rating: {rating.rate}</p>
         </div>
-      </div>
-
-      {/* Cuerpo de la tarjeta */}
-      <div className="card-body d-flex flex-column justify-content-between">
-        <h5 className="card-title">{product.title}</h5>
-        <p className="card-text fw-semibold">S/. {product.price}</p>
-
-        {/* Botón agregar al carrito */}
-        <button
-          className="btn btn-outline-dark mt-2"
-          onClick={() => console.log("Producto Agregado")}
-        >
-          Agregar al carrito
-        </button>
-      </div>
+      ))}
     </div>
   );
 }
